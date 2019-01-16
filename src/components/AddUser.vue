@@ -8,15 +8,15 @@
                 <form v-on:submit.prevent="addUser">
                     <div class="form-group">
                         <label>Nome:</label>
-                        <input type="text" class="form-control" v-model="newUser.nome"/>
+                        <input type="text" class="form-control" v-model="newUser.nome" required/>
                     </div>
                     <div class="form-group">
                         <label>E-mail:</label>
-                        <input type="email" class="form-control" v-model="newUser.email"/>
+                        <input type="email" class="form-control" v-model="newUser.email" required/>
                     </div>
                     <div class="form-group">
                         <label>Senha:</label>
-                        <input type="password" class="form-control" v-model="newUser.senha"/>
+                        <input type="password" class="form-control" v-model="newUser.senha" required/>
                     </div>
                     <div class="form-group">
                         <label>Data de nascimento:</label>
@@ -25,13 +25,19 @@
                     <div class="form-group">
                         <label>UF:</label>
                         <select class="form-control" v-model="newUser.uf">
-                            <option>Bahia</option>
+                            <option value="">Selecione um UF</option>
+                            <option v-for="(country_obj, country) in places" :value="country">
+                                {{ country }}
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Cidade:</label>
-                        <select class="form-control" v-model="newUser.cidade">
-                            <option>Salvador</option>
+                        <select class="form-control" v-model="newUser.cidade" :disabled="countries.length == 0">
+                            <option>Selecione uma cidade</option>
+                            <option v-for="(city_obj, city) in countries">
+                                {{ city }}
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">

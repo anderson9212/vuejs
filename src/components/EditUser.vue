@@ -8,15 +8,15 @@
                 <form v-on:submit.prevent="updateUser">
                     <div class="form-group">
                         <label>Nome:</label>
-                        <input type="text" class="form-control" v-model="newUser.nome"/>
+                        <input type="text" class="form-control" v-model="newUser.nome" required/>
                     </div>
                     <div class="form-group">
                         <label>E-mail:</label>
-                        <input type="email" class="form-control" v-model="newUser.email" />
+                        <input type="email" class="form-control" v-model="newUser.email" required/>
                     </div>
                     <div class="form-group">
                         <label>Senha:</label>
-                        <input type="password" class="form-control" v-model="newUser.senha" />
+                        <input type="password" class="form-control" v-model="newUser.senha" required/>
                     </div>
                     <div class="form-group">
                         <label>Data de nascimento:</label>
