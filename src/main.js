@@ -1,26 +1,30 @@
 import Vue from 'vue'
 import VueFire from 'vuefire'
 import VueRouter from 'vue-router'
-import NProgress from 'nprogress';
+import NProgress from 'nprogress'
+import VueMoment from 'vue-moment'
+import VModal from 'vue-js-modal'
 
 import App from './App.vue'
 
 import AddUser from './components/AddUser.vue'
 import EditUser from './components/EditUser.vue'
 import ListUser from './components/ListUser.vue'
-import Home from './components/Home.vue'
 
 import '../node_modules/nprogress/nprogress.css'
 
 Vue.use(VueFire)
 Vue.use(VueRouter)
+Vue.use(VueMoment)
+Vue.use(VModal)
+
 Vue.config.productionTip = false
 
 const routes = [
   {
-    name: 'Home',
+    name: 'List',
     path: '/',
-    component: Home
+    component: ListUser
   },
   {
     name: 'Add',
@@ -31,11 +35,6 @@ const routes = [
     name: 'Edit',
     path: '/edit/:id',
     component: EditUser
-  },
-  {
-    name: 'List',
-    path: '/index',
-    component: ListUser
   }
 ];
 

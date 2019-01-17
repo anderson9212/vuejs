@@ -6,45 +6,79 @@
             </div>
             <div class="card-body">
                 <form v-on:submit.prevent="updateUser">
-                    <div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>Nome:</label>
                         <input type="text" class="form-control" v-model="newUser.nome" required/>
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>E-mail:</label>
                         <input type="email" class="form-control" v-model="newUser.email" required/>
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>Senha:</label>
                         <input type="password" class="form-control" v-model="newUser.senha" required/>
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>Data de nascimento:</label>
                         <input type="date" class="form-control" v-model="newUser.dtNascimento" />
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>UF:</label>
-                        <select class="form-control" v-model="newUser.uf">
-                            <option>Bahia</option>
+                        <select class="form-control" v-model="newUser.uf" @change="comboCidade">
+                            <option value="">Selecione um UF</option>
+                            <option v-for="data in uf" :value="data.id" v-bind:key="data.id">
+                                {{ data.nome }}
+                            </option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>cidade:</label>
-                        <select class="form-control" v-model="newUser.cidade">
-                            <option>Salvador</option>
+                        <select class="form-control" v-model="newUser.cidade" :disabled="cidade.length == 0">
+                            <option value="">Selecione uma cidade</option>
+                            <option v-for="data in cidade" :value="data.id" v-bind:key="data.id">
+                                {{ data.nome }}
+                            </option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    	</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
                         <label>Logradouro:</label>
                         <input type="text" class="form-control" v-model="newUser.logradouro" />
-                    </div>
-                    <div class="form-group">
-                        <label>Telefones:</label>
-                        <input type="tel" class="form-control" v-model="newUser.telefones" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Salvar"/>
-                    </div>
+                    	</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+                        <label>Telefone:</label>
+                        <input type="tel" class="form-control" v-model="newUser.telefone" />
+                    	</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+											<input type="submit" class="btn btn-primary" value="Salvar"/>
+									</div>
                 </form>
             </div>
         </div>
@@ -54,6 +88,8 @@
 <script>
 
 import { db } from '../config/db';
+import IbgeApi from '@/services/IbgeApi';
+import toastr from 'toastr';
 
 export default {
   components: {
@@ -68,7 +104,9 @@ export default {
   },
   data () {
     return {
-      newUser: {}
+      newUser: {},
+      uf: [],
+      cidade: []
     }
   },
   created() {
@@ -81,14 +119,31 @@ export default {
        uf: usuario.uf,
        cidade: usuario.cidade,
        logradouro: usuario.logradouro,
-       telefones: usuario.telefones,
+       telefone: usuario.telefone,
      }
   },
   methods: {
     updateUser() {
-      this.$firebaseRefs.usuarios.child(this.$route.params.id).set(this.newUser);
-      this.$router.push('/index')
+			this.$firebaseRefs.usuarios.child(this.$route.params.id).set(this.newUser);
+			toastr.success('Usuário salvo com sucesso!');
+      this.$router.push('/')
+    },
+    comboCidade() {
+			IbgeApi.localidades(this.newUser.uf, localidade => {
+				this.cidade = localidade.data;
+			})
     }
-  }
+  },
+  mounted() {
+    IbgeApi.localidades(null, localidade => {
+			this.uf = localidade.data;
+		})
+
+    if(this.newUser.uf) {
+			IbgeApi.localidades(this.newUser.uf, localidade => {
+				this.cidade = localidade.data;
+			})
+    }
+	}
 }
 </script>

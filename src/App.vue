@@ -1,15 +1,12 @@
 <template>
   <div id="app" class="container">
-    <nav class="navbar navbar-expand-sm bg-light">
+    <nav class="navbar_gen navbar navbar-expand bg-light">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">Home</router-link>
+          <router-link :to="{ name: 'List' }" class="nav-link">Listar usuários</router-link>
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'Add' }" class="nav-link">Adicionar usuário</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'List' }" class="nav-link">Listar usuários</router-link>
         </li>
       </ul>
     </nav>
@@ -21,12 +18,8 @@
 
 <style lang="css">
   @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-</style>
-
-<style>
-  .gap {
-    margin-top: 50px;
-  }
+  @import '../node_modules/toastr/build/toastr.min.css';
+  @import 'assets/style.css';
 </style>
 
 <script>
