@@ -3,15 +3,15 @@
 ##### Simples CRUD de usuário, feito com a tecnologia VueJs
 
 ## Detalhes de Implemetação
-Foi utilizado a tecnologia VueJs para facilitar o desenvolvimento, com as dependências:
-Axios - para consumo da API do IBGE
-Bootstrap - melhorar visual do CRUD
-Vuefire - Faz as consultas com o banco de dados no firebase
-nProgress - Efeito de carregamento das páginas
-Toastr - Retorno de mensagem no envio de formulários
-Vue-moment - Formata data
-Vue-router - Cria as rotas da aplicação
-Vue-js-modal - para fazer efeito modal na alteração de senha
+Foi utilizado a tecnologia VueJs para facilitar o desenvolvimento, com as dependências:<br>
+<strong>Axios -</strong> para consumo da API do IBGE;<br>
+<strong>Bootstrap -</strong> melhorar visual do CRUD;<br>
+<strong>Vuefire -</strong> Faz as consultas com o banco de dados no firebase;<br>
+<strong>nProgress -</strong> Efeito de carregamento das páginas;<br>
+<strong>Toastr -</strong> Retorno de mensagem no envio de formulários;<br>
+<strong>Vue-moment -</strong> Formata data;<br>
+<strong>Vue-router -</strong> Cria as rotas da aplicação;<br>
+<strong>Vue-js-modal -</strong> para fazer efeito modal na alteração de senha.
 
 ### Como rodar a aplicação
 Com o [Nodejs](https://nodejs.org) instalado, baixe todas as dependências necessária atravé do comando:
@@ -26,4 +26,4 @@ Para iniciar o servidor, utilizar o comando:
 npm run serve
 ```
 
-Acessar no navegador o endereço que irá aparecer no retorno do comando acima
+Acessar no navegador, o endereço que irá aparecer no retorno do comando acima.
